@@ -7,14 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		00E356F31AD99517003FC87E /* GTMetronomTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* GTMetronomTests.m */; };
-		0C80B921A6F3F58F76C31292 /* libPods-GTMetronom.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DCACB8F33CDC322A6C60F78 /* libPods-GTMetronom.a */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2C0EA9E9EE31E55B60E1DE37 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 4B16FD15461E772135F59CED /* PrivacyInfo.xcprivacy */; };
-		7699B88040F8A987B510C191 /* libPods-GTMetronom-GTMetronomTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-GTMetronom-GTMetronomTests.a */; };
+		65C60F782C04DC390019DA69 /* MicPermissionManagerBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C60F762C04DC390019DA69 /* MicPermissionManagerBridge.m */; };
+		65C60F792C04DC390019DA69 /* MicPermissionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C60F772C04DC390019DA69 /* MicPermissionManager.m */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		BB403573B5C19C9A2AA23D45 /* libPods-GTMetronom.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 66FD2C68938CA1D703C5910C /* libPods-GTMetronom.a */; };
+		F6D702ED188BB14FE4F4CFAC /* libPods-GTMetronom-GTMetronomTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 18D1DE8CDACC318AF6663E27 /* libPods-GTMetronom-GTMetronomTests.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -28,25 +29,25 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		00E356EE1AD99517003FC87E /* GTMetronomTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GTMetronomTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		00E356F21AD99517003FC87E /* GTMetronomTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GTMetronomTests.m; sourceTree = "<group>"; };
-		13B07F961A680F5B00A75B9A /* GTMetronom.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GTMetronom.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = GTMetronom/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = GTMetronom/AppDelegate.mm; sourceTree = "<group>"; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = GTMetronom/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = GTMetronom/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = GTMetronom/main.m; sourceTree = "<group>"; };
 		13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = PrivacyInfo.xcprivacy; path = GTMetronom/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
-		19F6CBCC0A4E27FBF8BF4A61 /* libPods-GTMetronom-GTMetronomTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GTMetronom-GTMetronomTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		18D1DE8CDACC318AF6663E27 /* libPods-GTMetronom-GTMetronomTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GTMetronom-GTMetronomTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B4392A12AC88292D35C810B /* Pods-GTMetronom.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GTMetronom.debug.xcconfig"; path = "Target Support Files/Pods-GTMetronom/Pods-GTMetronom.debug.xcconfig"; sourceTree = "<group>"; };
 		4B16FD15461E772135F59CED /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xml; name = PrivacyInfo.xcprivacy; path = GTMetronom/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		5709B34CF0A7D63546082F79 /* Pods-GTMetronom.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GTMetronom.release.xcconfig"; path = "Target Support Files/Pods-GTMetronom/Pods-GTMetronom.release.xcconfig"; sourceTree = "<group>"; };
 		5B7EB9410499542E8C5724F5 /* Pods-GTMetronom-GTMetronomTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GTMetronom-GTMetronomTests.debug.xcconfig"; path = "Target Support Files/Pods-GTMetronom-GTMetronomTests/Pods-GTMetronom-GTMetronomTests.debug.xcconfig"; sourceTree = "<group>"; };
-		5DCACB8F33CDC322A6C60F78 /* libPods-GTMetronom.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GTMetronom.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		65C60F682C04D7AC0019DA69 /* GTMetronom.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GTMetronom.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		65C60F722C04D99F0019DA69 /* GTMetronomTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GTMetronomTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		65C60F752C04DC390019DA69 /* MicPermissionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MicPermissionManager.h; path = GTMetronom/MicPermissionManager.h; sourceTree = "<group>"; };
+		65C60F762C04DC390019DA69 /* MicPermissionManagerBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MicPermissionManagerBridge.m; path = GTMetronom/MicPermissionManagerBridge.m; sourceTree = "<group>"; };
+		65C60F772C04DC390019DA69 /* MicPermissionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MicPermissionManager.m; path = GTMetronom/MicPermissionManager.m; sourceTree = "<group>"; };
+		66FD2C68938CA1D703C5910C /* libPods-GTMetronom.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GTMetronom.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = GTMetronom/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-GTMetronom-GTMetronomTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GTMetronom-GTMetronomTests.release.xcconfig"; path = "Target Support Files/Pods-GTMetronom-GTMetronomTests/Pods-GTMetronom-GTMetronomTests.release.xcconfig"; sourceTree = "<group>"; };
-		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,7 +55,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7699B88040F8A987B510C191 /* libPods-GTMetronom-GTMetronomTests.a in Frameworks */,
+				F6D702ED188BB14FE4F4CFAC /* libPods-GTMetronom-GTMetronomTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -62,33 +63,19 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0C80B921A6F3F58F76C31292 /* libPods-GTMetronom.a in Frameworks */,
+				BB403573B5C19C9A2AA23D45 /* libPods-GTMetronom.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		00E356EF1AD99517003FC87E /* GTMetronomTests */ = {
-			isa = PBXGroup;
-			children = (
-				00E356F21AD99517003FC87E /* GTMetronomTests.m */,
-				00E356F01AD99517003FC87E /* Supporting Files */,
-			);
-			path = GTMetronomTests;
-			sourceTree = "<group>";
-		};
-		00E356F01AD99517003FC87E /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				00E356F11AD99517003FC87E /* Info.plist */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
 		13B07FAE1A68108700A75B9A /* GTMetronom */ = {
 			isa = PBXGroup;
 			children = (
+				65C60F752C04DC390019DA69 /* MicPermissionManager.h */,
+				65C60F772C04DC390019DA69 /* MicPermissionManager.m */,
+				65C60F762C04DC390019DA69 /* MicPermissionManagerBridge.m */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.mm */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
@@ -101,46 +88,28 @@
 			name = GTMetronom;
 			sourceTree = "<group>";
 		};
-		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
+		247CD1C9B6CC3E269D35F461 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				5DCACB8F33CDC322A6C60F78 /* libPods-GTMetronom.a */,
-				19F6CBCC0A4E27FBF8BF4A61 /* libPods-GTMetronom-GTMetronomTests.a */,
+				66FD2C68938CA1D703C5910C /* libPods-GTMetronom.a */,
+				18D1DE8CDACC318AF6663E27 /* libPods-GTMetronom-GTMetronomTests.a */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Libraries;
 			sourceTree = "<group>";
 		};
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
 				13B07FAE1A68108700A75B9A /* GTMetronom */,
-				832341AE1AAA6A7D00B99B32 /* Libraries */,
-				00E356EF1AD99517003FC87E /* GTMetronomTests */,
-				83CBBA001A601CBA00E9B192 /* Products */,
-				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				BBD78D7AC51CEA395F1C20DB /* Pods */,
+				247CD1C9B6CC3E269D35F461 /* Frameworks */,
+				65C60F682C04D7AC0019DA69 /* GTMetronom.app */,
+				65C60F722C04D99F0019DA69 /* GTMetronomTests.xctest */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
 			tabWidth = 2;
 			usesTabs = 0;
-		};
-		83CBBA001A601CBA00E9B192 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				13B07F961A680F5B00A75B9A /* GTMetronom.app */,
-				00E356EE1AD99517003FC87E /* GTMetronomTests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
 		};
 		BBD78D7AC51CEA395F1C20DB /* Pods */ = {
 			isa = PBXGroup;
@@ -174,7 +143,7 @@
 			);
 			name = GTMetronomTests;
 			productName = GTMetronomTests;
-			productReference = 00E356EE1AD99517003FC87E /* GTMetronomTests.xctest */;
+			productReference = 65C60F722C04D99F0019DA69 /* GTMetronomTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		13B07F861A680F5B00A75B9A /* GTMetronom */ = {
@@ -195,7 +164,7 @@
 			);
 			name = GTMetronom;
 			productName = GTMetronom;
-			productReference = 13B07F961A680F5B00A75B9A /* GTMetronom.app */;
+			productReference = 65C60F682C04D7AC0019DA69 /* GTMetronom.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -224,7 +193,7 @@
 				Base,
 			);
 			mainGroup = 83CBB9F61A601CBA00E9B192;
-			productRefGroup = 83CBBA001A601CBA00E9B192 /* Products */;
+			productRefGroup = 83CBB9F61A601CBA00E9B192;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -390,7 +359,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				00E356F31AD99517003FC87E /* GTMetronomTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -400,6 +368,8 @@
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
+				65C60F792C04DC390019DA69 /* MicPermissionManager.m in Sources */,
+				65C60F782C04DC390019DA69 /* MicPermissionManagerBridge.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -469,6 +439,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3B4392A12AC88292D35C810B /* Pods-GTMetronom.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -497,6 +468,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5709B34CF0A7D63546082F79 /* Pods-GTMetronom.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -570,7 +542,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				LD = "";
 				LDPLUSPLUS = "";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -583,6 +555,7 @@
 					"\"$(inherited)\"",
 				);
 				MTL_ENABLE_DEBUG_INFO = YES;
+				NEW_SETTING = "";
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CPLUSPLUSFLAGS = (
 					"$(OTHER_CFLAGS)",
@@ -643,7 +616,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				LD = "";
 				LDPLUSPLUS = "";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -656,6 +629,7 @@
 					"\"$(inherited)\"",
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
+				NEW_SETTING = "";
 				OTHER_CPLUSPLUSFLAGS = (
 					"$(OTHER_CFLAGS)",
 					"-DFOLLY_NO_CONFIG",

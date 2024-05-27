@@ -1,16 +1,25 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Button, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, Button, StyleSheet, TouchableOpacity, NativeModules  } from 'react-native';
 import TrackPlayer, { Capability, Event, PlaybackState } from 'react-native-track-player';
+import AudioRecorderPlayer from 'react-native-audio-recorder-player';
+import { Platform, PermissionsAndroid } from 'react-native';
+import { check, PERMISSIONS, RESULTS } from 'react-native-permissions';
+
 
 const App: React.FC = () => {
   const [bpm, setBpm] = useState<number>(60); // Beats per minute
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
+  const [isRecording, setIsRecording] = useState<boolean>(false);
   const [stateChangeListener, setStateChangeListener] = useState<any>(null);
   const [trackChangeListener, setTrackChangeListener] = useState<any>(null);
   const [activeBox, setActiveBox] = useState<number>(-1); // 현재 활성화된 박스의 인덱스를 저장
   const [activeBoxCount, setActiveBoxCount] = useState<number>(1);
   const [beatBoxCount, setBeatBoxCount] = useState<number>(1);
-    
+  const { MicPermissionManager } = NativeModules;
+
+  // Initialize audioRecorderPlayer
+  const audioRecorderPlayer = new AudioRecorderPlayer();
+
   const toggleActiveBoxCount = (count: number) => {
     setActiveBoxCount(count);
     setBeatBoxCount(count);
@@ -47,8 +56,7 @@ const App: React.FC = () => {
   useEffect(() => {
     const onStateChange = (state: PlaybackState): void => {
       if (state.state === "playing") {
-        setActiveBox(prevBox => 
-          (prevBox + 1) % beatBoxCount); // 현재 박스의 인덱스를 변경
+        setActiveBox(prevBox => (prevBox + 1) % beatBoxCount); // 현재 박스의 인덱스를 변경
       }
     };
 
@@ -97,18 +105,9 @@ const App: React.FC = () => {
   };
 
   const startMetronome = async (): Promise<void> => {
-    // const beatDuration = 60 / bpm; // 한 박자당 걸리는 시간(초)
-    // const playbackRate = 1 / beatDuration; // 초당 재생 속도
-    // setActiveBox(-1);
-    // await TrackPlayer.seekTo(0);
-    // await TrackPlayer.setRate(playbackRate);
-    // await TrackPlayer.play();
-    // setIsPlaying(true);
-
     const beatDuration = 60 / bpm; // 한 박자당 걸리는 시간(초)
     const beatInterval = beatDuration / beatBoxCount; // 1 BPM을 3박자로 나눈 간격
     const playbackRate = 1 / beatInterval; // 초당 재생 속도
-    // setActiveBox(-1);
     await TrackPlayer.seekTo(0);
     await TrackPlayer.setRate(playbackRate);
     await TrackPlayer.play();
@@ -133,23 +132,76 @@ const App: React.FC = () => {
     stopMetronome();
     setActiveBox(-1);
     setBpm((prev) => Math.min(prev + 1, 300));
-  }
+  };
+  
   const decreaseBpm = (): void => {
     stopMetronome();
     setActiveBox(-1);
     setBpm((prev) => Math.max(prev - 1, 30));
+  };
+
+  const requestMicrophonePermission = (): void => {
+    MicPermissionManager.requestMicrophonePermissionWithCompletion((granted: boolean) => {
+        if (granted) {
+            console.log('Microphone permission granted');
+        } else {
+            console.log('Microphone permission denied');
+        }
+    });
+};
+
+  
+  const startRecording = async (): Promise<void> => {
+  try {
+    // 마이크 권한 요청
+    const hasPermission: boolean = await requestMicrophonePermission();
+
+    if (!hasPermission) {
+      console.error('Microphone permission denied');
+      return;
+    }
+
+    // 여기에 나머지 코드 추가
+    // ...
+  } catch (error) {
+    console.error('Error starting recording:', error);
   }
+};
+
+  const stopRecording = async (): Promise<void> => {
+    try {
+      const result: string = await audioRecorderPlayer.stopRecorder();
+      audioRecorderPlayer.removeRecordBackListener();
+      setIsRecording(false);
+      console.log('Recording result: ', result);
+      stopMetronome(); // Stop metronome when recording stops
+    } catch (error) {
+      console.error("Failed to stop recording", error);
+    }
+  };
+
+  const toggleRecording = () => {
+    if (isRecording) {
+      stopRecording();
+    } else {
+      startRecording();
+    }
+  };
 
   return (
     <View style={styles.container}>
+      <View style={styles.recodingContainer}>
+        <TouchableOpacity onPress={toggleRecording} style={styles.recodingBtn}>
+          <Text style={styles.recodingText}>{isRecording ? 'Stop Recording' : 'Start Recording'}</Text>
+        </TouchableOpacity>
+      </View>
       <View style={styles.borderContainer}> 
         {/* 각 박스의 색을 activeBox에 따라 동적으로 설정 */}
         {[...Array(activeBoxCount)].map((_, index) => (
-        <View key={index} style={[styles.subBox, index === activeBox ? styles.activeBox : null]}>
-          <Text style={styles.text}>V</Text>
-        </View>
-      ))}
-
+          <View key={index} style={[styles.subBox, index === activeBox ? styles.activeBox : null]}>
+            <Text style={styles.text}>V</Text>
+          </View>
+        ))}
       </View>
       <View style={styles.itemContainer}>
         <View style={styles.item}>
@@ -195,8 +247,20 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    flexWrap:'wrap',
+    flexWrap: 'wrap',
     backgroundColor: '#fff',
+  },
+  recodingContainer: {
+    marginHorizontal: 'auto',
+  },
+  recodingBtn: {
+    marginTop: 70,
+  },
+  recodingText: {
+    alignContent: 'center',
+    color: 'red',
+    fontSize: 30,
+    fontWeight: 'bold',
   },
   borderContainer: {
     display: 'flex',
@@ -206,47 +270,43 @@ const styles = StyleSheet.create({
     borderWidth: 3,
     backgroundColor: 'white',
     width: 380,
-    marginTop: 250,
-    height:200,
+    marginTop: 150,
+    height: 200,
     borderRadius: 20,
-    marginHorizontal: 'auto',  
+    marginHorizontal: 'auto',
   },
-  subBox:{
-    borderWidth:0,
-    backgroundColor:'gray',
-    width:50,
-    height:50,
+  subBox: {
+    borderWidth: 0,
+    backgroundColor: 'gray',
+    width: 50,
+    height: 50,
     marginHorizontal: 'auto',
     marginTop: 75,
-    borderRadius: 30
+    borderRadius: 30,
   },
-  text:{
+  text: {
     textAlign: 'center',
     marginTop: 13,
     fontSize: 20,
     fontWeight: 'bold',
   },
-  
-    itemContainer: {
-      display: 'flex',
-      flexDirection: 'row',
-      alignItems: 'center',
-      width: 450,
-    },
-    item: {
-      marginHorizontal: 'auto',
-      // flex: 1, // 두 View 컴포넌트를 동일한 너비로 설정
-    },
-    bpmText: {
-
-      fontSize: 40,
-      
-    },
-    controls: {
-      flexDirection: 'row',
-      justifyContent: 'center', // 수평 정렬을 위해 중앙 정렬 설정
-    },
-  
+  itemContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    width: 450,
+  },
+  item: {
+    marginHorizontal: 'auto',
+    // flex: 1, // 두 View 컴포넌트를 동일한 너비로 설정
+  },
+  bpmText: {
+    fontSize: 40,
+  },
+  controls: {
+    flexDirection: 'row',
+    justifyContent: 'center', // 수평 정렬을 위해 중앙 정렬 설정
+  },
   button: {
     padding: 20,
     backgroundColor: '#007BFF',
@@ -274,13 +334,12 @@ const styles = StyleSheet.create({
   activeBox: {
     backgroundColor: 'red', // 활성화된 박스의 색상
   },
-
   beatBtnContainer: {
     display: "flex",
     flexDirection: 'row',
     marginTop: 150,
-    marginHorizontal: 'auto'
-  }
+    marginHorizontal: 'auto',
+  },
 });
 
 export default App;

@@ -1167,6 +1167,10 @@ PODS:
     - React-logger (= 0.74.1)
     - React-perflogger (= 0.74.1)
     - React-utils (= 0.74.1)
+  - RNAudioRecorderPlayer (3.6.7):
+    - React-Core
+  - RNPermissions (4.1.5):
+    - React-Core
   - RNSound (0.11.2):
     - React-Core
     - RNSound/Core (= 0.11.2)
@@ -1233,6 +1237,8 @@ DEPENDENCIES:
   - React-runtimescheduler (from `../node_modules/react-native/ReactCommon/react/renderer/runtimescheduler`)
   - React-utils (from `../node_modules/react-native/ReactCommon/react/utils`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
+  - RNAudioRecorderPlayer (from `../node_modules/react-native-audio-recorder-player`)
+  - RNPermissions (from `../node_modules/react-native-permissions`)
   - RNSound (from `../node_modules/react-native-sound`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
@@ -1351,6 +1357,10 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/react/utils"
   ReactCommon:
     :path: "../node_modules/react-native/ReactCommon"
+  RNAudioRecorderPlayer:
+    :path: "../node_modules/react-native-audio-recorder-player"
+  RNPermissions:
+    :path: "../node_modules/react-native-permissions"
   RNSound:
     :path: "../node_modules/react-native-sound"
   Yoga:
@@ -1411,11 +1421,13 @@ SPEC CHECKSUMS:
   React-runtimescheduler: e2152ed146b6a35c07386fc2ac4827b27e6aad12
   React-utils: 3285151c9d1e3a28a9586571fc81d521678c196d
   ReactCommon: f42444e384d82ab89184aed5d6f3142748b54768
+  RNAudioRecorderPlayer: 9b34adc281800e5b19258f1b91d889b1ef3abdd6
+  RNPermissions: 8742b04b44c2642f3f1c2dd059053c33e4a807fa
   RNSound: 6c156f925295bdc83e8e422e7d8b38d33bc71852
   SocketRocket: abac6f5de4d4d62d24e11868d7a2f427e0ef940d
   SwiftAudioEx: f6aa653770f3a0d3851edaf8d834a30aee4a7646
   Yoga: 348f8b538c3ed4423eb58a8e5730feec50bce372
 
-PODFILE CHECKSUM: 4355602ca24796c1b8617dba4686e127fa5701d7
+PODFILE CHECKSUM: 3e09e529d71e4f1fee4122a150cc4d077034ead6
 
 COCOAPODS: 1.14.3
