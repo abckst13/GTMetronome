@@ -7,7 +7,16 @@ const App: React.FC = () => {
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const [stateChangeListener, setStateChangeListener] = useState<any>(null);
   const [trackChangeListener, setTrackChangeListener] = useState<any>(null);
-  const [activeBox, setActiveBox] = useState<number>(0); // 현재 활성화된 박스의 인덱스를 저장
+  const [activeBox, setActiveBox] = useState<number>(-1); // 현재 활성화된 박스의 인덱스를 저장
+  const [activeBoxCount, setActiveBoxCount] = useState<number>(1);
+  const [beatBoxCount, setBeatBoxCount] = useState<number>(1);
+    
+  const toggleActiveBoxCount = (count: number) => {
+    setActiveBoxCount(count);
+    setBeatBoxCount(count);
+    setActiveBox(-1);
+    setIsPlaying(false);
+  };
 
   useEffect(() => {
     const setupPlayerAndMetronome = async () => {
@@ -37,9 +46,9 @@ const App: React.FC = () => {
 
   useEffect(() => {
     const onStateChange = (state: PlaybackState): void => {
-      console.log('Playback state changed:', state);
       if (state.state === "playing") {
-        setActiveBox(prevBox => (prevBox + 1) % 4); // 현재 박스의 인덱스를 변경
+        setActiveBox(prevBox => 
+          (prevBox + 1) % beatBoxCount); // 현재 박스의 인덱스를 변경
       }
     };
 
@@ -61,7 +70,7 @@ const App: React.FC = () => {
       stateChangeListener.remove();
       trackChangeListener.remove();
     };
-  }, []);
+  }, [beatBoxCount]);
 
   const setupPlayer = async (): Promise<void> => {
     await TrackPlayer.setupPlayer();
@@ -69,6 +78,7 @@ const App: React.FC = () => {
       id: 'tick',
       url: require('./assets/tick.mp3'),
       title: 'Tick',
+      audioQuality: 'High', 
       artist: 'Metronome',
       numberOfLoops: -1, // 무한 반복 설정
     });
@@ -87,27 +97,27 @@ const App: React.FC = () => {
   };
 
   const startMetronome = async (): Promise<void> => {
-    const beatDuration = 60 / bpm; // 한 박자당 걸리는 시간(초)
-    const playbackRate = 1 / beatDuration; // 초당 재생 속도
-    setActiveBox(0);
-    await TrackPlayer.seekTo(0);
-    await TrackPlayer.setRate(playbackRate);
-    await TrackPlayer.play();
-    setIsPlaying(true);
-
     // const beatDuration = 60 / bpm; // 한 박자당 걸리는 시간(초)
-    // const beatInterval = beatDuration / 3; // 1 BPM을 3박자로 나눈 간격
-    // const playbackRate = 1 / beatInterval; // 초당 재생 속도
-  
+    // const playbackRate = 1 / beatDuration; // 초당 재생 속도
+    // setActiveBox(-1);
     // await TrackPlayer.seekTo(0);
     // await TrackPlayer.setRate(playbackRate);
     // await TrackPlayer.play();
     // setIsPlaying(true);
+
+    const beatDuration = 60 / bpm; // 한 박자당 걸리는 시간(초)
+    const beatInterval = beatDuration / beatBoxCount; // 1 BPM을 3박자로 나눈 간격
+    const playbackRate = 1 / beatInterval; // 초당 재생 속도
+    // setActiveBox(-1);
+    await TrackPlayer.seekTo(0);
+    await TrackPlayer.setRate(playbackRate);
+    await TrackPlayer.play();
+    setIsPlaying(true);
   };
 
   const stopMetronome = async (): Promise<void> => {
     await TrackPlayer.pause();
-    setActiveBox(0);
+    setActiveBox(-1);
     setIsPlaying(false);
   };
 
@@ -121,12 +131,12 @@ const App: React.FC = () => {
 
   const increaseBpm = (): void => {
     stopMetronome();
-    setActiveBox(0);
+    setActiveBox(-1);
     setBpm((prev) => Math.min(prev + 1, 300));
   }
   const decreaseBpm = (): void => {
     stopMetronome();
-    setActiveBox(0);
+    setActiveBox(-1);
     setBpm((prev) => Math.max(prev - 1, 30));
   }
 
@@ -134,10 +144,12 @@ const App: React.FC = () => {
     <View style={styles.container}>
       <View style={styles.borderContainer}> 
         {/* 각 박스의 색을 activeBox에 따라 동적으로 설정 */}
-        <View style={[styles.subBox, activeBox === 0 ? styles.activeBox : null]}><Text style={styles.text}>V</Text></View>
-        <View style={[styles.subBox, activeBox === 1 ? styles.activeBox : null]}><Text style={styles.text}>V</Text></View>
-        <View style={[styles.subBox, activeBox === 2 ? styles.activeBox : null]}><Text style={styles.text}>V</Text></View>
-        <View style={[styles.subBox, activeBox === 3 ? styles.activeBox : null]}><Text style={styles.text}>V</Text></View>
+        {[...Array(activeBoxCount)].map((_, index) => (
+        <View key={index} style={[styles.subBox, index === activeBox ? styles.activeBox : null]}>
+          <Text style={styles.text}>V</Text>
+        </View>
+      ))}
+
       </View>
       <View style={styles.itemContainer}>
         <View style={styles.item}>
@@ -153,6 +165,20 @@ const App: React.FC = () => {
             </TouchableOpacity>
           </View>
         </View>
+      </View>
+      <View style={styles.beatBtnContainer}>
+        <TouchableOpacity onPress={() => toggleActiveBoxCount(1)} style={styles.button}>
+          <Text style={styles.buttonTitle}>4</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => toggleActiveBoxCount(3)} style={styles.button}>
+          <Text style={styles.buttonTitle}>3</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => toggleActiveBoxCount(2)} style={styles.button}>
+          <Text style={styles.buttonTitle}>8</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => toggleActiveBoxCount(4)} style={styles.button}>
+          <Text style={styles.buttonTitle}>16</Text>
+        </TouchableOpacity>
       </View>
       <View style={styles.statBtn}>
         <TouchableOpacity onPress={toggleMetronome} style={styles.button}>
@@ -179,8 +205,8 @@ const styles = StyleSheet.create({
     borderColor: 'black',
     borderWidth: 3,
     backgroundColor: 'white',
-    width: 330,
-    marginTop: 140,
+    width: 380,
+    marginTop: 250,
     height:200,
     borderRadius: 20,
     marginHorizontal: 'auto',  
@@ -205,7 +231,7 @@ const styles = StyleSheet.create({
       display: 'flex',
       flexDirection: 'row',
       alignItems: 'center',
-      width: 370,
+      width: 450,
     },
     item: {
       marginHorizontal: 'auto',
@@ -235,7 +261,7 @@ const styles = StyleSheet.create({
     width: 300,
     height: 80,
     borderRadius: 15,
-    marginTop: 100,
+    marginTop: 60,
     marginHorizontal: 'auto',
     // backgroundColor: '#007BFF',
   },
@@ -248,6 +274,13 @@ const styles = StyleSheet.create({
   activeBox: {
     backgroundColor: 'red', // 활성화된 박스의 색상
   },
+
+  beatBtnContainer: {
+    display: "flex",
+    flexDirection: 'row',
+    marginTop: 150,
+    marginHorizontal: 'auto'
+  }
 });
 
 export default App;
