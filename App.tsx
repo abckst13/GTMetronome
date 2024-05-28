@@ -3,7 +3,8 @@ import { View, Text, Button, StyleSheet, TouchableOpacity, NativeModules  } from
 import TrackPlayer, { Capability, Event, PlaybackState } from 'react-native-track-player';
 import AudioRecorderPlayer from 'react-native-audio-recorder-player';
 import { Platform, PermissionsAndroid } from 'react-native';
-import { check, PERMISSIONS, RESULTS } from 'react-native-permissions';
+import { check, PERMISSIONS, RESULTS, request } from 'react-native-permissions';
+import { Alert } from 'react-native/Libraries/Alert/Alert';
 
 
 const App: React.FC = () => {
@@ -154,7 +155,21 @@ const App: React.FC = () => {
   const startRecording = async (): Promise<void> => {
   try {
     // 마이크 권한 요청
-    const hasPermission: boolean = await requestMicrophonePermission();
+    // const hasPermission: boolean = request('ios');
+
+    const hasPermission: string = Platform.OS === "ios" ? PERMISSIONS.IOS.CAMERA : PERMISSIONS.ANDROID.CAMERA;
+    try {
+        // Request Permission
+        const result = await request(PERMISSIONS.IOS.MICROPHONE);
+
+        if (result == RESULTS.GRANTED) {
+            console.log("권한이 허용되었습니다.")
+        }
+    } catch (err) {
+        Alert.alert("Camera permission err");
+        console.warn(err);
+    }
+
 
     if (!hasPermission) {
       console.error('Microphone permission denied');
